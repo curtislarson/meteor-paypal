@@ -1,18 +1,3 @@
-(function () {
-
-/* Imports */
-var Meteor = Package.meteor.Meteor;
-var OAuth = Package.oauth.OAuth;
-var Oauth = Package.oauth.Oauth;
-var _ = Package.underscore._;
-var ServiceConfiguration = Package['service-configuration'].ServiceConfiguration;
-var Random = Package.random.Random;
-
-/* Package-scope variables */
-var PayPal;
-
-(function () {
-
 PayPal = {};
 
 // Request PayPal credentials for the user
@@ -69,16 +54,3 @@ PayPal.requestCredential = function (options, credentialRequestCompleteCallback)
     popupOptions: { height: 600 }
   });
 };
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-
-}).call(this);
-
-
-/* Exports */
-if (typeof Package === 'undefined') Package = {};
-Package.paypal = {
-  PayPal: PayPal
-};
-
-})();

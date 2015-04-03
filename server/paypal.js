@@ -1,19 +1,3 @@
-(function () {
-
-/* Imports */
-var Meteor = Package.meteor.Meteor;
-var OAuth = Package.oauth.OAuth;
-var Oauth = Package.oauth.Oauth;
-var HTTP = Package.http.HTTP;
-var HTTPInternals = Package.http.HTTPInternals;
-var _ = Package.underscore._;
-var ServiceConfiguration = Package['service-configuration'].ServiceConfiguration;
-
-/* Package-scope variables */
-var PayPal;
-
-(function () {
-
 PayPal = {};
 
 OAuth.registerService('paypal', 2, null, function(query) {
@@ -81,16 +65,3 @@ var getTokens = function (query) {
 PayPal.retrieveCredential = function(credentialToken, credentialSecret) {
   return OAuth.retrieveCredential(credentialToken, credentialSecret);
 };
-
-
-
-}).call(this);
-
-
-/* Exports */
-if (typeof Package === 'undefined') Package = {};
-Package.paypal = {
-  PayPal: PayPal
-};
-
-})();
