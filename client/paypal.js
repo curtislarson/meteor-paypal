@@ -26,24 +26,20 @@ PayPal.requestCredential = function (options, credentialRequestCompleteCallback)
   var scope = ['client_credentials'];
   if (options.requestPermissions)
     scope = options.requestPermissions;
-  scope = _.union(scope, requiredScope);
   var flatScope = _.map(scope, encodeURIComponent).join('+');
-
-  // https://developers.google.com/accounts/docs/OAuth2WebServer#formingtheurl
-  var accessType = options.requestOfflineToken ? 'offline' : 'online';
-  var approvalPrompt = options.forceApprovalPrompt ? 'force' : 'auto';
-
   var loginStyle = OAuth._loginStyle('paypal', config, options);
+
+  console.log("loginStyle=", loginStyle);
 
   var loginUrl =
     config.url + '/v1/oauth2/token' +
-    '?response_type=code' +
+    '?response_type=token' +
     '&client_id=' + config.clientId +
     '&grant_type=' + flatScope +
     '&redirect_uri=' + OAuth._redirectUri('paypal', config) +
-    '&state=' + OAuth._stateParam(loginStyle, credentialToken) +
-    '&access_type=' + accessType +
-    '&approval_prompt=' + approvalPrompt;
+    '&state=' + OAuth._stateParam(loginStyle, credentialToken);
+
+    console.log("loginUrl=", loginUrl);
 
   OAuth.launchLogin({
     loginService: "paypal",

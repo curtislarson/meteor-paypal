@@ -13,6 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom("WINDOWS-PREVIEW@0.3.0");
   api.use("http", "server");
+  api.use("random", "client");
   api.use([
     "oauth2",
     "oauth",
@@ -21,4 +22,6 @@ Package.onUse(function(api) {
   ], ["client", "server"]);
   api.addFiles("client/paypal.js", "client");
   api.addFiles("server/paypal.js", "server");
+
+  api.export("PayPal");
 });
