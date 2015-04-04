@@ -12,9 +12,9 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom("WINDOWS-PREVIEW@0.3.0");
-  api.use("http", "server");
-  api.use("random", "client");
+  api.use(["random", "base64"], "client");
   api.use([
+    "http",
     "oauth2",
     "oauth",
     "underscore",
