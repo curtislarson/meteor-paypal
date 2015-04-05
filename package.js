@@ -10,18 +10,27 @@ Package.describe({
   documentation: "README.md"
 });
 
+Npm.depends({
+  "paypal-rest-sdk": "1.5.2"
+});
+
 Package.onUse(function(api) {
   api.versionsFrom("WINDOWS-PREVIEW@0.3.0");
-  api.use(["random", "base64"], "client");
-  api.use([
-    "http",
-    "oauth2",
-    "oauth",
-    "underscore",
-    "service-configuration"
-  ], ["client", "server"]);
-  api.addFiles("client/paypal.js", "client");
+
   api.addFiles("server/paypal.js", "server");
 
   api.export("PayPal");
+});
+
+Package.onTest(function(api) {
+  api.use("quackware:paypal2");
+  api.use([
+    "tinytest"
+  ], ["server"]);
+
+  // Files to test
+  api.addFiles("server/paypal.js", "server");
+
+  // Test drivers
+  api.addFiles("server/tests/paypal.t.js", "server");
 });
